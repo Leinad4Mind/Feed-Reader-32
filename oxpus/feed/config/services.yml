@@ -1,0 +1,35 @@
+services:
+    oxpus.feed.listener:
+        class: oxpus\feed\event\main_listener
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '%core.table_prefix%'
+            - '@ext.manager'
+            - '@path_helper'
+            - '@service_container'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@auth'
+            - '@template'
+            - '@user'
+            - '@cache.driver'
+        tags:
+            - { name: event.listener }
+    oxpus.feed.cron.tasks.feed_cron:
+        class: oxpus\feed\cron\tasks\feed_cron
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '%core.table_prefix%'
+            - '@config'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@ext.manager'
+            - '@auth'
+        calls:
+            - [set_name, [cron.task.oxpus.feed_reader]]
+        tags:
+            - { name: cron.task }
