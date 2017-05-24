@@ -120,7 +120,7 @@ class main_module
 				$template_for_posting			= htmlspecialchars_decode($request->variable('template_for_posting', '', true));
 				$enabled_posting				= $request->variable('enabled_posting', 0);
 				$enabled_displaying				= $request->variable('enabled_displaying', 0);
-				$username						= utf8_normalize_nfc(request_var('username', '', true));
+				$username						= $request->variable('username', '', true);
 				$poster_forum_destination_id	= $request->variable('poster_forum_destination_id', 0);
 				$poster_topic_destination_id	= $request->variable('poster_topic_destination_id', 0);
 				$refresh_after_hours			= $request->variable('refresh_after_hours', 0) * 3600;
@@ -137,7 +137,7 @@ class main_module
 					$result = $db->sql_query($sql);
 					$poster_id = (int) $db->sql_fetchfield('user_id');
 					$db->sql_freeresult($result);
-		
+
 					if (!$poster_id)
 					{
 						$poster_id = $user->data['user_id'];

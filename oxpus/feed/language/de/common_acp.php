@@ -26,8 +26,6 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, array(
-	'OX_NEWS_TICKER'									=> 'News Ticker',
-
 	'ACP_OX_FEED_READER'								=> 'Feed Reader',
 	'ACP_OX_FEED_READER_MANAGE'							=> 'Feeds verwalten',
 	'ACP_OX_FEED_READER_MANAGE_UPDATED'					=> 'Feed aktualisiert',

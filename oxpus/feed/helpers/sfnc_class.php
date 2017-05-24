@@ -654,7 +654,7 @@ class sfnc_class
 		{
 			$uid = $bitfield = $options = $poll = '';
 
-			$subject = truncate_string($this->items[$i]['title']);
+			$subject = html_entity_decode(strip_tags(truncate_string($this->items[$i]['title'])));
 			generate_text_for_storage($subject, $uid, $bitfield, $options, false, false, false);
 
 			$sql = 'SELECT post_subject
@@ -667,7 +667,7 @@ class sfnc_class
 
 			if (strnatcasecmp($row['post_subject'], $subject))
 			{
-				$message = $this->apply_template($this->items[$i]);
+				$message = html_entity_decode(strip_tags($this->apply_template($this->items[$i])));
 
 				$poll = $post_data = array();
 				$post_time = $post_id = 0;
@@ -682,7 +682,7 @@ class sfnc_class
 				$db->sql_freeresult($result);
 
 				$forum_id = $this->poster_forum_destination_id;
-		
+
 				generate_text_for_storage($message, $uid, $bitfield, $options, true, true, true);
 
 				if ((int) $this->poster_topic_destination_id <> 0)
